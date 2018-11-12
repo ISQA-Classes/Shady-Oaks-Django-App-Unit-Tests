@@ -2,10 +2,13 @@ from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 
 def main():
+    # This Chromedriver link needs to be updated based on local file structure.
     driver = webdriver.Chrome(executable_path='C:\Selenium\chromedriver_win32\chromedriver.exe')
     driver.implicitly_wait(30)
     driver.maximize_window()
     print("Opening Shady Oaks Home Page")
+
+    # If new pythonanywhere site is used, update this hard-coded value.
     driver.get("http://aghermanek.pythonanywhere.com")
     print("Got to Home Page")
 
