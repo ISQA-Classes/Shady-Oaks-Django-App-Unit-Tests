@@ -9,7 +9,7 @@ def main():
     print("Opening Shady Oaks Home Page")
 
     # If new pythonanywhere site is used, update this hard-coded value.
-    driver.get("http://aghermanek.pythonanywhere.com")
+    driver.get("http://shadyoaksgolfcourse.pythonanywhere.com")
     print("Got to Home Page")
 
     #first page objects
@@ -21,7 +21,7 @@ def main():
     #second page objects
     username_button = driver.find_element_by_css_selector("#id_username")
     password_button = driver.find_element_by_css_selector("#id_password")
-    submit_button = driver.find_element_by_css_selector("body > div > form > input[type='submit']:nth-child(4)")
+    submit_button = driver.find_element_by_css_selector("body > div > form > input[type='submit']:nth-child(9)")
 
     username_button.send_keys("instructor")
     print("username input entered")
@@ -34,7 +34,7 @@ def main():
 
     driver.implicitly_wait(30)
 
-    header = driver.find_element_by_css_selector("body > div.page-container > h2")
+    header = driver.find_element_by_css_selector("#myHeader > div > h1")
 
     if header.is_displayed():
         print("Reached Home page with successful login!")
