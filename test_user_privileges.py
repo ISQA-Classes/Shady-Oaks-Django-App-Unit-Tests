@@ -9,7 +9,7 @@ class ShadyOaksTestUserPrivileges(unittest.TestCase):
     def setUp(self):
         self.driver = webdriver.Chrome()
 
-    def test_blog(self):
+    def test_user(self):
         user = "instructor"
         pwd = "instructor1a"
         driver = self.driver
@@ -31,24 +31,22 @@ class ShadyOaksTestUserPrivileges(unittest.TestCase):
         elem = driver.find_element_by_id("id_username")
         elem.send_keys("tester")
         elem = driver.find_element_by_id("id_password1")
-        elem.send_keys("tester1a")
+        elem.send_keys("maverick1a")
         time.sleep(5)
         elem = driver.find_element_by_id("id_password2")
-        elem.send_keys("tester1a")
+        elem.send_keys("maverick1a")
         time.sleep(5)
-        elem = driver.find_element_by_id("user_form").click()
+        elem = driver.find_element_by_css_selector("#user_form > div > div > input.default").click()
         time.sleep(5)
-        elem = driver.find_element_by_id("user-tools").click()
-        time.sleep(5)
-        logout = driver.find_element_by_css_selector("#myHeader > span > p > a").click()
-        time.sleep(5)
+
+        logout = driver.find_element_by_css_selector("#user-tools > a:nth-child(4)").click()
         driver.get("http://127.0.0.1:8000/admin")
         time.sleep(5)
         elem = driver.find_element_by_id("id_username")
         elem.send_keys("tester")
         time.sleep(5)
         elem = driver.find_element_by_id("id_password")
-        elem.send_keys("tester1a")
+        elem.send_keys("maverick1a")
         time.sleep(5)
         submit = driver.find_element_by_css_selector("#login-form > div.submit-row > input[type='submit']")
         submit.click()
@@ -60,6 +58,25 @@ class ShadyOaksTestUserPrivileges(unittest.TestCase):
             print("User not granted access!")
         else:
             print("Error! Not running as functioned.")
+        driver.get("http://127.0.0.1:8000/admin")
+        elem = driver.find_element_by_id("id_username")
+        elem.send_keys(user)
+        elem = driver.find_element_by_id("id_password")
+        elem.send_keys(pwd)
+        elem.send_keys(Keys.RETURN)
+        driver.get("http://127.0.0.1:8000/admin")
+        time.sleep(5)
+        elem = driver.find_element_by_css_selector("#content-main > div.app-auth.module > "
+                                                   "table > tbody > tr.model-user > th > a").click()
+        search = driver.find_element_by_css_selector("#searchbar")
+        search.send_keys("tester")
+        submitsearch = driver.find_element_by_css_selector("#changelist-search > div > "
+                                                           "input[type='submit']:nth-child(3)")
+        submitsearch.click()
+        selectItem = driver.find_element_by_css_selector("#result_list > tbody > tr:nth-child(1) > th > a").click()
+        delete = driver.find_element_by_css_selector("#user_form > div > div > p > a").click()
+        finalDelete = driver.find_element_by_css_selector("#content > form > div > "
+                                                          "input[type='submit']:nth-child(2)").click()
 
     def tearDown(self):
         self.driver.close()
@@ -67,3 +84,4 @@ class ShadyOaksTestUserPrivileges(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
