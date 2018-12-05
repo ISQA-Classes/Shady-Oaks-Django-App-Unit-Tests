@@ -50,8 +50,8 @@ class Tee_Test_adduser(unittest.TestCase):
         button = driver.find_element_by_css_selector("input[type='submit']")
         button.click()
 
-def tearDown(self):
-    self.driver.close()
+    def tearDown(self):
+        self.driver.close()
 
 if __name__ == "__main__":
     unittest.main()
